@@ -19,7 +19,9 @@ namespace FluentAutomation.Extension
         public static void OpenNewWindow(this IActionSyntaxProvider I)
         {
             var browser = FluentTest.ProviderInstance as IWebDriver;
-            browser.ExecuteJavaScript<object>("window.open();");
+            var script = "window.open();";
+            ((IJavaScriptExecutor)browser).ExecuteScript(script);
+            
         }
     }
 }
