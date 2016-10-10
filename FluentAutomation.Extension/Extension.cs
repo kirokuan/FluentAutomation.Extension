@@ -16,12 +16,17 @@ namespace FluentAutomation.Extension
             var browser = FluentTest.ProviderInstance as IWebDriver;
             browser.Quit();
         }
-        public static void OpenNewWindow(this IActionSyntaxProvider I)
+
+        public static void OpenNewWindow(this IActionSyntaxProvider I, string url)
         {
             var browser = FluentTest.ProviderInstance as IWebDriver;
-            var script = "window.open();";
+            var script = string.Format("window.open('{0}', '_blank');", url);
             ((IJavaScriptExecutor)browser).ExecuteScript(script);
-            
         }
+        public static void OpenNewWindow(this IActionSyntaxProvider I)
+        {
+            OpenNewWindow(I,"");
+        }
+
     }
 }
